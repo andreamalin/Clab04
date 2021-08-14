@@ -2,14 +2,11 @@ import pandas as pd
 from test import batTesting
 from Clab03 import clab03
 
-class testOverview(object):
+class testOverview():
 
-    def __init__(self, bitChain):
-        self.bitChain = bitChain
+    def __init__(self):
         self.bt = batTesting()
         self.df = pd.DataFrame(columns=['TEST','P-value','Conclusion'])
-        self.runTest(bitChain)
-
         
     def runTest(self, bitChain):
         bt = self.bt
@@ -30,11 +27,10 @@ class testOverview(object):
             self.df['P-value'].iloc[i] = tests[i][0]
             self.df['Conclusion'].iloc[i] = tests[i][1]
            
-        print(self.df)
         return self.df
 
 
     #def dataFrame(self):
         
 clab = clab03()
-testOverview(clab.b1)
+print(testOverview().runTest(clab.b1))
