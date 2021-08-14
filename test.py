@@ -238,7 +238,7 @@ class batTesting(object):
         else:
             return [p, 0] # Se retorna el valor p y que fue fallida
 
-    def probs(K,M,i):
+    def probs(self,K,M,i):
         M8 =      [0.2148, 0.3672, 0.2305, 0.1875]
         M128 =    [0.1174, 0.2430, 0.2493, 0.1752, 0.1027, 0.1124]
         M512 =    [0.1170, 0.2460, 0.2523, 0.1755, 0.1027, 0.1124]
@@ -315,7 +315,7 @@ class batTesting(object):
         # Calculo x**2
         chi_sq = 0.0
         for i in range(K+1):
-            p_i = probs(K,M,i)
+            p_i = self.probs(K,M,i)
             upper = (v[i] - N*p_i)**2
             lower = N*p_i
             chi_sq += upper/lower
@@ -434,10 +434,10 @@ class batTesting(object):
         for k in range(startk,endk+1):
             c = (((4.0*k)+1.0)*z)/math.sqrt(n)
             #d = scipy.stats.norm.cdf(c)
-            d = normcdf(c)
+            d = self.normcdf(c)
             c = (((4.0*k)-1.0)*z)/math.sqrt(n)
             #e = scipy.stats.norm.cdf(c)
-            e = normcdf(c)
+            e = self.normcdf(c)
             sum_a = sum_a + d - e
 
         sum_b = 0.0
@@ -446,10 +446,10 @@ class batTesting(object):
         for k in range(startk,endk+1):
             c = (((4.0*k)+3.0)*z)/math.sqrt(n)
             #d = scipy.stats.norm.cdf(c)
-            d = normcdf(c)
+            d = self.normcdf(c)
             c = (((4.0*k)+1.0)*z)/math.sqrt(n)
             #e = scipy.stats.norm.cdf(c)
-            e = normcdf(c)
+            e = self.normcdf(c)
             sum_b = sum_b + d - e 
 
         p = 1.0 - sum_a + sum_b
@@ -482,8 +482,8 @@ class batTesting(object):
                 backward_max = abs(pos)
         
         # Step 4
-        p_forward  = p_value(n, forward_max)
-        p_backward = p_value(n, backward_max)
+        p_forward  = self.p_value(n, forward_max)
+        p_backward = self.p_value(n, backward_max)
         
         success = ((p_forward >= 0.01) and (p_backward >= 0.01)) # Si el valor p es mayor al 1%, la prueba es exitosa
 
@@ -562,8 +562,8 @@ class batTesting(object):
     def psi_sq_mv1(self,m, n, padded_input):
         counts = [0 for i in range(2**m)]
         for i in range(2**m):
-            pattern = int2patt(i,m)
-            count = countpattern(pattern,padded_input,n)
+            pattern = self.int2patt(i,m)
+            count = self.countpattern(pattern,padded_input,n)
             counts.append(count)
             
         psi_sq_m = 0.0
@@ -588,9 +588,9 @@ class batTesting(object):
 
         padded_input=input[0:n]+input[0:m-1]
         
-        psi_sq_m   = psi_sq_mv1(m, n, padded_input)
-        psi_sq_mm1 = psi_sq_mv1(m-1, n, padded_input)
-        psi_sq_mm2 = psi_sq_mv1(m-2, n, padded_input)    
+        psi_sq_m   = self.psi_sq_mv1(m, n, padded_input)
+        psi_sq_mm1 = self.psi_sq_mv1(m-1, n, padded_input)
+        psi_sq_mm2 = self.psi_sq_mv1(m-2, n, padded_input)    
         
         delta1 = psi_sq_m - psi_sq_mm1
         delta2 = psi_sq_m - (2*psi_sq_mm1) + psi_sq_mm2
@@ -607,7 +607,7 @@ class batTesting(object):
 
 
 """
-print(test01('100010101'))
+print(batTesting().test01('100010101'))
 print(test02('100010101'))
 print(test03('100010101'))
 print(test04('100010101'))
@@ -616,5 +616,5 @@ print(test06('100010101100010101100010101100010101100010101100010101100010101100
 print(test07('100010101'))
 print(test08('100010101'))
 print(test09('100010101'))
-print(test10('1000101011000101011000101011000101011000101011000101"01100010101100010101100010101100010101100010101100010101100010101100010101100010101100010101100010101100010101'))"
+print(test10('1000101011000101011000101011000101011000101011000101"01100010101100010101100010101100010101100010101100010101100010101100010101100010101100010101100010101100010101'))
 """

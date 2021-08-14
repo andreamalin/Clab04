@@ -5,7 +5,7 @@ import random
 class clab03():
 
     def __init__(self):
-        self.img = self.img2bits('Clab04/p1.jpg')
+        self.img = self.img2bits('p1.jpg')
         img = self.img
         self.b1 = self.xor(img, self.wichmanhill(len(img)))
         self.b2 = self.xor(img, self.lfsr(len(img), '11001001', (8,7,6,1)))
@@ -13,10 +13,9 @@ class clab03():
         self.m1 = self.xor(img, self.LCG(6,55,11))
         self.m2 = self.xor(img, self.LCG(6,55,37))
         self.m3 = self.xor(img, self.LCG(6,55,150))
-        
-
-        # print(bt.test01('100010101'))
-    
+        self.good = [self.b1, self.b2, self.b3]
+        self.bad = [self.m1, self.m2, self.m3]
+            
     def img2bits(self,imgPath):
 
         img = cv2.imread(imgPath, 2) # Abrir imagen
@@ -33,8 +32,6 @@ class clab03():
             # cadena += '\n'
             
         return cadena
-
-    #img = img2bits('Clab04/randomGen/Clab03/p1.jpg')
 
     def lfsr(self,lonFinal, seed, taps):
         # Resultado y sr con la semilla inicial
@@ -106,4 +103,3 @@ class clab03():
         return bitChain
 
 
-clab03()
