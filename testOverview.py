@@ -2,6 +2,8 @@ import pandas as pd
 from test import batTesting
 from Clab03 import clab03
 
+clab = clab03()
+
 class testOverview():
 
     def __init__(self):
@@ -32,5 +34,21 @@ class testOverview():
 
     #def dataFrame(self):
         
-clab = clab03()
+print("---------------------------------------")
+print("Cadenas de Buen Ocultamiento de Patrón")
+print("---------------------------------------")
+print("\nWichman-Hill de longitud 128,992\n")
 print(testOverview().runTest(clab.b1))
+print("\nLFSR con seed 11001001\n")
+print(testOverview().runTest(clab.b2))
+print("\nLCG (a:612 b:5,115 N:7,212)\n")
+print(testOverview().runTest(clab.b3))
+print("\n---------------------------------------")
+print("Cadenas de Mal Ocultamiento de Patrón")
+print("---------------------------------------\n")
+print("\n LCG (a:6  b:55 N: 11)\n")
+print(testOverview().runTest(clab.m1))
+print("\nLCG (a:6  b:55 N: 37)\n")
+print(testOverview().runTest(clab.m2))
+print("\nLCG (a:6  b:55 N: 150)\n")
+print(testOverview().runTest(clab.m3))
