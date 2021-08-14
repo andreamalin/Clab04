@@ -601,9 +601,9 @@ class batTesting(object):
         success = (p1 >= 0.01) and (p2 >= 0.01) # Si el valor p es mayor al 1%, la prueba es exitosa
 
         if (success):
-            return [p1, p2, 1] # Se retorna el valor p y que fue exitosa
+            return [[p1, p2], 1] # Se retorna el valor p y que fue exitosa
         else:
-            return [p1, p2, 0] # Se retorna el valor p y que fue fallida
+            return [[p1, p2], 0] # Se retorna el valor p y que fue fallida
 
 
 """
